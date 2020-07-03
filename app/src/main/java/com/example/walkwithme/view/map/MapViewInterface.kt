@@ -1,4 +1,4 @@
-package com.example.walkwithme
+package com.example.walkwithme.view.map
 
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker

@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.walkwithme.fragments.ChallengesFragment
-import com.example.walkwithme.fragments.MapFragment
-import com.example.walkwithme.fragments.SettingsFragment
-import com.example.walkwithme.fragments.StatsFragment
-import com.example.walkwithme.presenter.map.MapPresenter
+import com.example.walkwithme.view.challenges.ChallengesFragment
+import com.example.walkwithme.view.map.MapFragment
+import com.example.walkwithme.view.settings.SettingsFragment
+import com.example.walkwithme.view.stats.StatsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.osmdroid.config.Configuration
 import java.util.*

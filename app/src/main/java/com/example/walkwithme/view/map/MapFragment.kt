@@ -1,13 +1,10 @@
-package com.example.walkwithme.fragments
+package com.example.walkwithme.view.map
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.walkwithme.MainActivity
-import com.example.walkwithme.MapViewInterface
 import com.example.walkwithme.R
 import com.example.walkwithme.presenter.map.MapPresenter
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -20,9 +17,9 @@ import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
-import kotlin.collections.Map
 
-class MapFragment : Fragment(), MapViewInterface {
+class MapFragment : Fragment(),
+    MapViewInterface {
 
     private var mapPresenter: MapPresenter? = null
 

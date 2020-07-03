@@ -1,12 +1,8 @@
 package com.example.walkwithme.presenter.map
 
-import android.content.Context
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.walkwithme.MainActivity
-import com.example.walkwithme.MapViewInterface
+import com.example.walkwithme.view.map.MapViewInterface
 import com.example.walkwithme.R
-import com.example.walkwithme.fragments.MapFragment
 import com.example.walkwithme.model.Algorithms
 import org.osmdroid.bonuspack.location.NominatimPOIProvider
 import org.osmdroid.bonuspack.location.POI
