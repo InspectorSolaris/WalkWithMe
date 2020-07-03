@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WalkWithMe</string>
     <string name="action_challenges">Challenges</string>
-    <string name="action_explore">Explore</string>
+    <string name="action_map">Map</string>
     <string name="action_settings">Settings</string>
+    <string name="action_stats">Stats</string>
 </resources>
