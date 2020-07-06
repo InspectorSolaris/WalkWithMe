@@ -12,27 +12,26 @@ import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.Polyline
 import kotlin.collections.ArrayList
 import kotlin.math.max
 
 class MapPresenter(
     private val mapInterface: MapViewInterface
 ) {
-    private val wayPoints = ArrayList<GeoPoint>()
-    private val poiMarkers = ArrayList<Marker>()
-    private var lastRoad: Polyline? = null
+    fun requestRoute() {
+
+    }
 
     fun buildRoute() {
-        for (marker in poiMarkers) {
+        for (marker in mapInterface.poiMarkers) {
             mapInterface.getMap().overlays.remove(marker)
         }
-        mapInterface.mapRemoveOverlay(lastRoad)
+        mapInterface.mapRemoveOverlay(mapInterface.lastRoad)
 
         val roadManager = MapQuestRoadManager("sudOFI4elaABURi9uNTp74tdaN3scVcb").also {
             it.addRequestOption("routeType=pedestrian")
         }
-        val road = roadManager.getRoad(wayPoints)
+        val road = roadManager.getRoad(mapInterface.wayPoints)
         val filteredRoute = ArrayList<GeoPoint>()
 
         for (i in 0 until road.mRouteHigh.size step max(1, road.mLength.toInt())) {
@@ -47,7 +46,7 @@ class MapPresenter(
                 pointsOfInterest.addAll(
                     poiProvider.getPOICloseTo(
                         filteredRoute[i],
-                        "cafe",
+                        "Monument",
                         1,
                         road.mLength * 0.001
                     )
@@ -59,19 +58,20 @@ class MapPresenter(
         for (i in 0 until pointsOfInterest.size) {
             val curPointOfInterest = pointsOfInterest[i].mLocation
 
-            if (curPointOfInterest !in wayPoints) {
-                wayPoints.add(1, curPointOfInterest)
+            if (curPointOfInterest !in mapInterface.wayPoints) {
+                mapInterface.wayPoints.add(1, curPointOfInterest)
             }
         }
 
-        val distance = Array(wayPoints.size) { Array(wayPoints.size) { 0.0 } }
+        val distance =
+            Array(mapInterface.wayPoints.size) { Array(mapInterface.wayPoints.size) { 0.0 } }
 
-        for (i in 0 until wayPoints.size - 1) {
-            for (j in i + 1 until wayPoints.size) {
+        for (i in 0 until mapInterface.wayPoints.size - 1) {
+            for (j in i + 1 until mapInterface.wayPoints.size) {
                 val roadFragment = roadManager.getRoad(
                     arrayListOf(
-                        wayPoints[i],
-                        wayPoints[j]
+                        mapInterface.wayPoints[i],
+                        mapInterface.wayPoints[j]
                     )
                 )
 
@@ -84,26 +84,26 @@ class MapPresenter(
         val newWayPoints = ArrayList<GeoPoint>()
 
         for (i in path) {
-            newWayPoints.add(wayPoints[i])
+            newWayPoints.add(mapInterface.wayPoints[i])
 
-            if (i != 0 && i != wayPoints.size - 1) {
+            if (i != 0 && i != mapInterface.wayPoints.size - 1) {
                 setMarker(
                     createPOIMarker(
-                        wayPoints[i].latitude,
-                        wayPoints[i].longitude,
+                        mapInterface.wayPoints[i].latitude,
+                        mapInterface.wayPoints[i].longitude,
                         path.indexOf(i)
                     )
                 )
             }
         }
 
-        wayPoints.subList(1, wayPoints.size - 1).clear()
-        lastRoad = RoadManager.buildRoadOverlay(
+        mapInterface.wayPoints.subList(1, mapInterface.wayPoints.size - 1).clear()
+        mapInterface.lastRoad = RoadManager.buildRoadOverlay(
             roadManager.getRoad(newWayPoints),
             0x7f338a3e,
             7.5f
         )
-        mapInterface.mapAddOverlay(lastRoad)
+        mapInterface.mapAddOverlay(mapInterface.lastRoad)
         mapInterface.mapInvalidate()
     }
 
@@ -111,15 +111,15 @@ class MapPresenter(
         val mReceiver = object : MapEventsReceiver {
 
             override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
-                if (wayPoints.size < 2) {
+                if (mapInterface.wayPoints.size < 2) {
                     setMarker(
                         createPathMarker(
                             p.latitude,
                             p.longitude,
-                            wayPoints.size
+                            mapInterface.wayPoints.size
                         )
                     )
-                    wayPoints.add(p)
+                    mapInterface.wayPoints.add(p)
                 }
 
                 return false
@@ -206,7 +206,7 @@ class MapPresenter(
                     override fun onMarkerDrag(marker: Marker) {}
                     override fun onMarkerDragStart(marker: Marker) {}
                     override fun onMarkerDragEnd(marker: Marker) {
-                        wayPoints[index] = marker.position
+                        mapInterface.wayPoints[index] = marker.position
                     }
 
                 }
@@ -225,7 +225,7 @@ class MapPresenter(
                 R.drawable.marker_poi
             )
             it.title = index.toString()
-            poiMarkers.add(it)
+            mapInterface.poiMarkers.add(it)
         }
     }
 }

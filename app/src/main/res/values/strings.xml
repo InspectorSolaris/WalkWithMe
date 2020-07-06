@@ -4,4 +4,23 @@
     <string name="action_map">Map</string>
     <string name="action_settings">Settings</string>
     <string name="action_stats">Stats</string>
+    <string name="action_request">Request</string>
+    <string name="text_quicker">Quicker</string>
+    <string name="text_more_interesting">More interesting</string>
+    <string name="text_route_type">Route type</string>
+    <string name="text_user_settings">User settings</string>
+    <string name="text_category_ranking">Category ranking</string>
+    <string name="test_avatar_username">Dmitry Avanesov</string>
+    <string name="test_avatar_level">Level 69</string>
+    <string name="text_username">Username</string>
+    <string name="test_username">Dmitry Avanesov</string>
+    <string name="text_password">Password</string>
+    <string name="test_password">**************</string>
+    <string name="hint_id">Id</string>
+    <string name="hint_value">Value</string>
+    <string name="text_get">GET</string>
+    <string name="text_get_id">GET (ID)</string>
+    <string name="text_post">POST</string>
+    <string name="text_put">PUT</string>
+    <string name="text_delete">DELETE</string>
 </resources>

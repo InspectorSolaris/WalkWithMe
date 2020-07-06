@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.walkwithme.view.request.RequestFragment
 import com.example.walkwithme.view.challenges.ChallengesFragment
 import com.example.walkwithme.view.map.MapFragment
 import com.example.walkwithme.view.settings.SettingsFragment
@@ -25,16 +26,22 @@ class MainActivity :
     public override fun onCreate(
         savedInstanceState: Bundle?
     ) {
-        StrictMode.setThreadPolicy(
-            StrictMode.ThreadPolicy.Builder()
-                .permitAll()
-                .build()
-        )
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadFragment(MapFragment())
 
+        setConfiguration()
+        loadFragment(MapFragment())
+        setNavigation()
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.Container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun setNavigation() {
         NavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_map -> {
@@ -53,9 +60,21 @@ class MainActivity :
                     loadFragment(SettingsFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
+                R.id.action_request -> {
+                    loadFragment(RequestFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
             }
             false
         }
+    }
+
+    private fun setConfiguration() {
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .permitAll()
+                .build()
+        )
 
         Configuration.getInstance().apply {
             userAgentValue = "OBP_Tuto/1.0"
@@ -75,13 +94,6 @@ class MainActivity :
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.Container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 
     private fun requestPermissionsIfNecessary(
@@ -112,7 +124,7 @@ class MainActivity :
     ) {
         val permissionsToRequest = ArrayList<String>()
         for (i in grantResults.indices) {
-            permissionsToRequest.add(permissions[i])
+            permissionsToRequest.add(permissions[i]);
         }
 
         if (permissionsToRequest.size > 0) {
