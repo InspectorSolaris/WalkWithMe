@@ -1,15 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/UserSettingsTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sett"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="315dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/text_user_settings"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/UsernameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserSettingsTextView">
+
+        <TextView
+            android:id="@+id/UsernameTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:gravity="center_vertical"
+            android:text="@string/text_username"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/UsernameTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:text="@string/test_username" />
+
+        <ImageView
+            android:id="@+id/UsernameEditImageView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.25"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/edit" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/PasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UsernameLayout">
+
+        <TextView
+            android:id="@+id/PasswordTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:gravity="center_vertical"
+            android:text="@string/text_password"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/PasswordTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:text="@string/test_password" />
+
+        <ImageView
+            android:id="@+id/PasswordEditImageView"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.25"
+            app:srcCompat="@drawable/edit" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/RouteTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/text_route_type"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordLayout" />
+
+    <SeekBar
+        android:id="@+id/InterestSeekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:max="6"
+        android:progress="3"
+        android:progressDrawable="@drawable/interest_seek_bar_progress"
+        android:thumb="@drawable/interest_seek_bar_thumb"
+        android:thumbTint="@color/colorBasic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RouteTypeTextView"
+        app:tickMark="@android:color/transparent" />
+
+    <LinearLayout
+        android:id="@+id/InterestLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InterestSeekBar">
+
+        <TextView
+            android:id="@+id/QuickerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/text_quicker"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/MoreInterestingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/text_more_interesting"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/CategoryRankingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/text_category_ranking"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InterestLayout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/CategoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CategoryRankingTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

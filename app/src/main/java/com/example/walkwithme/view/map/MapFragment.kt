@@ -14,6 +14,7 @@ import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Overlay
+import org.osmdroid.views.overlay.Polyline
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -22,6 +23,10 @@ class MapFragment : Fragment(),
     MapViewInterface {
 
     private var mapPresenter: MapPresenter? = null
+
+    override var wayPoints = ArrayList<GeoPoint>()
+    override var poiMarkers = ArrayList<Marker>()
+    override var lastRoad: Polyline? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,16 +38,26 @@ class MapFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setPresenter()
+        setListeners()
+        setMapConfiguration()
+    }
+
+    private fun setPresenter() {
         mapPresenter = MapPresenter(this).apply {
             setOnMapTapListener()
             setRotationGestureOverlay()
             setMyLocationOverlay()
         }
+    }
 
+    private fun setListeners() {
         BuildRouteButton.setOnClickListener { mapPresenter?.buildRoute() }
         MyLocationButton.setOnClickListener { mapPresenter?.setMyLocationOverlay() }
         CompassButton.setOnClickListener { mapPresenter?.setDefaultRotation() }
+    }
 
+    private fun setMapConfiguration() {
         Map.apply {
             setTileSource(TileSourceFactory.MAPNIK)
             setMultiTouchControls(true)

@@ -9,7 +9,9 @@
         android:id="@+id/SearchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/search_bar_background"
         android:elevation="5dp"
         android:iconifiedByDefault="false"
@@ -67,29 +69,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="96dp"
         android:alpha="0.75"
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="@color/colorBasic"
-        app:layout_constraintBottom_toTopOf="@+id/BottomNavMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/build_route" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/BottomNavMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:paddingTop="5dp"
-        android:paddingBottom="2.5dp"
-        app:itemBackground="@android:color/white"
-        app:itemIconTint="@color/colorDark"
-        app:itemTextColor="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:srcCompat="@drawable/build_route" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
