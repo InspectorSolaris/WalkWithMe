@@ -52,7 +52,7 @@ class MapFragment : Fragment(),
     }
 
     private fun setListeners() {
-        BuildRouteButton.setOnClickListener { mapPresenter?.requestRoute() }
+        BuildRouteButton.setOnClickListener { mapPresenter?.buildRoute() }
         MyLocationButton.setOnClickListener { mapPresenter?.setMyLocationOverlay() }
         CompassButton.setOnClickListener { mapPresenter?.setDefaultRotation() }
     }
