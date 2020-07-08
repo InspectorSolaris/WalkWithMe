@@ -124,7 +124,7 @@ class MainActivity :
     ) {
         val permissionsToRequest = ArrayList<String>()
         for (i in grantResults.indices) {
-            permissionsToRequest.add(permissions[i]);
+            permissionsToRequest.add(permissions[i])
         }
 
         if (permissionsToRequest.size > 0) {
