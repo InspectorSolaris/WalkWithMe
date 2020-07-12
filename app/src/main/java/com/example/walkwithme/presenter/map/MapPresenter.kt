@@ -1,9 +1,10 @@
 package com.example.walkwithme.presenter.map
 
-import androidx.core.content.ContextCompat
-import com.example.walkwithme.view.map.MapViewInterface
 import com.example.walkwithme.R
 import com.example.walkwithme.model.Algorithms
+import com.example.walkwithme.model.infowindow.POIMarkerInfoWindow
+import com.example.walkwithme.model.infowindow.PathMarkerInfoWindow
+import com.example.walkwithme.view.map.MapViewInterface
 import org.osmdroid.bonuspack.location.NominatimPOIProvider
 import org.osmdroid.bonuspack.location.POI
 import org.osmdroid.bonuspack.routing.MapQuestRoadManager
@@ -13,16 +14,15 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
-import kotlin.collections.ArrayList
 import kotlin.math.max
 
 class MapPresenter(
     private val mapInterface: MapViewInterface
 ) {
 
-    var wayPoints: ArrayList<GeoPoint> = ArrayList<GeoPoint>()
-    var poiMarkers: ArrayList<Marker> = ArrayList<Marker>()
-    var lastRoad: Polyline? = null
+    private var wayPoints: ArrayList<GeoPoint> = ArrayList()
+    private var poiMarkers: ArrayList<Marker> = ArrayList()
+    private var lastRoad: Polyline? = null
 
     fun buildRoute() {
         for (marker in poiMarkers) {
@@ -41,7 +41,7 @@ class MapPresenter(
         }
 
         val poiProvider = NominatimPOIProvider("OSMBonusPackTutoUserAgent")
-        val pointsOfInterest = ArrayList<POI>()
+        var pointsOfInterest = ArrayList<POI>()
 
         for (i in 0 until filteredRoute.size) {
             try {
@@ -57,12 +57,10 @@ class MapPresenter(
             }
         }
 
-        for (i in 0 until pointsOfInterest.size) {
-            val curPointOfInterest = pointsOfInterest[i].mLocation
+        pointsOfInterest = ArrayList(pointsOfInterest.distinctBy { it.mId })
 
-            if (curPointOfInterest !in wayPoints) {
-                wayPoints.add(1, curPointOfInterest)
-            }
+        for (i in 0 until pointsOfInterest.size) {
+            wayPoints.add(1, pointsOfInterest[i].mLocation)
         }
 
         val distance =
@@ -93,7 +91,8 @@ class MapPresenter(
                     createPOIMarker(
                         wayPoints[i].latitude,
                         wayPoints[i].longitude,
-                        path.indexOf(i)
+                        path.indexOf(i),
+                        pointsOfInterest[i - 1]
                     )
                 )
             }
@@ -199,6 +198,7 @@ class MapPresenter(
                     it.title = "Finish"
                 }
             }
+            it.infoWindow = PathMarkerInfoWindow(R.layout.path_marker_info, mapInterface.getMap())
             it.setOnMarkerDragListener(
                 object : Marker.OnMarkerDragListener {
 
@@ -216,11 +216,15 @@ class MapPresenter(
     private fun createPOIMarker(
         latitude: Double,
         longitude: Double,
-        index: Int
+        index: Int,
+        point: POI
     ): Marker {
         return createMarker(latitude, longitude).also {
             it.icon = mapInterface.getPOIMarkerIcon()
             it.title = index.toString()
+            it.snippet = point.mType
+            it.subDescription = point.mDescription
+            it.infoWindow = POIMarkerInfoWindow(R.layout.poi_marker_info, mapInterface.getMap())
             poiMarkers.add(it)
         }
     }

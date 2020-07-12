@@ -1,11 +1,9 @@
 package com.example.walkwithme.view.map
 
 import android.graphics.drawable.Drawable
-import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Overlay
-import org.osmdroid.views.overlay.Polyline
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
