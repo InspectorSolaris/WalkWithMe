@@ -1,22 +1,17 @@
-package com.example.walkwithme.fragments
+package com.example.walkwithme.view.settings
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.walkwithme.R
-import com.example.walkwithme.SettingsViewInterface
 import com.example.walkwithme.adapter.CategoryAdapter
-import com.example.walkwithme.model.category.CategoryCard
-import com.example.walkwithme.presenter.MapPresenter
-import com.example.walkwithme.presenter.SettingsPresenter
+import com.example.walkwithme.presenter.settings.SettingsPresenter
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), SettingsViewInterface {
@@ -37,7 +32,9 @@ class SettingsFragment : Fragment(), SettingsViewInterface {
     }
 
     private fun setPresenter() {
-        settingsPresenter = SettingsPresenter(this).apply {
+        settingsPresenter = SettingsPresenter(
+            this
+        ).apply {
             setCategoryRecyclerView()
         }
     }

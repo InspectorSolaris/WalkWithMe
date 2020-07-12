@@ -25,4 +25,10 @@
         android:icon="@drawable/action_settings"
         android:title="@string/action_settings"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_request"
+        android:enabled="true"
+        android:icon="@drawable/action_request"
+        android:title="@string/action_request"
+        app:showAsAction="ifRoom" />
 </menu>

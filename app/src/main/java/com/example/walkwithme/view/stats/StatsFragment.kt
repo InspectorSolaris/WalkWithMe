@@ -1,4 +1,4 @@
-package com.example.walkwithme.fragments
+package com.example.walkwithme.view.stats
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.example.walkwithme.R
 import com.example.walkwithme.adapter.StatsAdapter
 import kotlinx.android.synthetic.main.fragment_stats.*
 
-class StatsFragment : Fragment() {
+class StatsFragment : Fragment(), StatsViewInterface {
 
     override fun onCreateView(
         inflater: LayoutInflater,

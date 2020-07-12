@@ -1,7 +1,7 @@
-package com.example.walkwithme.presenter
+package com.example.walkwithme.presenter.settings
 
 import com.example.walkwithme.R
-import com.example.walkwithme.SettingsViewInterface
+import com.example.walkwithme.view.settings.SettingsViewInterface
 import com.example.walkwithme.adapter.CategoryAdapter
 import com.example.walkwithme.model.category.CategoryCard
 

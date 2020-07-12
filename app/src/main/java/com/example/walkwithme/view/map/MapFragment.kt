@@ -1,13 +1,14 @@
-package com.example.walkwithme.fragments
+package com.example.walkwithme.view.map
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.walkwithme.MapViewInterface
 import com.example.walkwithme.R
-import com.example.walkwithme.presenter.MapPresenter
+import com.example.walkwithme.presenter.map.MapPresenter
 import kotlinx.android.synthetic.main.fragment_map.*
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -20,13 +21,10 @@ import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
-class MapFragment : Fragment(), MapViewInterface {
+class MapFragment : Fragment(),
+    MapViewInterface {
 
     private var mapPresenter: MapPresenter? = null
-
-    override var wayPoints = ArrayList<GeoPoint>()
-    override var poiMarkers = ArrayList<Marker>()
-    override var lastRoad: Polyline? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,6 +88,20 @@ class MapFragment : Fragment(), MapViewInterface {
 
     override fun getMarker(): Marker {
         return Marker(Map)
+    }
+
+    override fun getPathMarkerIcon(): Drawable? {
+        return ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.marker
+        )
+    }
+
+    override fun getPOIMarkerIcon(): Drawable? {
+        return ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.marker_poi
+        )
     }
 
     override fun getRotationGestureOverlay(): RotationGestureOverlay {
