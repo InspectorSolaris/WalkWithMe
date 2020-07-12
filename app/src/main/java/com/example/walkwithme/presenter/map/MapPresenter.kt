@@ -2,7 +2,8 @@ package com.example.walkwithme.presenter.map
 
 import com.example.walkwithme.R
 import com.example.walkwithme.model.Algorithms
-import com.example.walkwithme.model.infowindow.MarkerInfoWindow
+import com.example.walkwithme.model.infowindow.POIMarkerInfoWindow
+import com.example.walkwithme.model.infowindow.PathMarkerInfoWindow
 import com.example.walkwithme.view.map.MapViewInterface
 import org.osmdroid.bonuspack.location.NominatimPOIProvider
 import org.osmdroid.bonuspack.location.POI
@@ -197,6 +198,7 @@ class MapPresenter(
                     it.title = "Finish"
                 }
             }
+            it.infoWindow = PathMarkerInfoWindow(R.layout.path_marker_info, mapInterface.getMap())
             it.setOnMarkerDragListener(
                 object : Marker.OnMarkerDragListener {
 
@@ -222,7 +224,7 @@ class MapPresenter(
             it.title = index.toString()
             it.snippet = point.mType
             it.subDescription = point.mDescription
-            it.infoWindow = MarkerInfoWindow(R.layout.marker_info_window, mapInterface.getMap())
+            it.infoWindow = POIMarkerInfoWindow(R.layout.poi_marker_info, mapInterface.getMap())
             poiMarkers.add(it)
         }
     }

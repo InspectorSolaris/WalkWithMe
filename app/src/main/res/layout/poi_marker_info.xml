@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/InfoWindowCardView"
+    android:id="@+id/POIMarkerInfoCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="5dp"
@@ -12,14 +12,16 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <FrameLayout
+        android:id="@+id/POIMarkerInfoBorder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorDark">
+        android:background="@color/colorBasic">
 
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:id="@+id/POIMarkerInfoLayout"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:background="@android:color/white">
@@ -31,7 +33,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="1"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +45,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Category"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Number" />
 
@@ -55,7 +58,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
