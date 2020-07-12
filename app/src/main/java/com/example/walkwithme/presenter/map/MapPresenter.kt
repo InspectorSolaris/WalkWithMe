@@ -1,6 +1,8 @@
 package com.example.walkwithme.presenter.map
 
+import com.example.walkwithme.R
 import com.example.walkwithme.model.Algorithms
+import com.example.walkwithme.model.infowindow.MarkerInfoWindow
 import com.example.walkwithme.view.map.MapViewInterface
 import org.osmdroid.bonuspack.location.NominatimPOIProvider
 import org.osmdroid.bonuspack.location.POI
@@ -220,6 +222,7 @@ class MapPresenter(
             it.title = index.toString()
             it.snippet = point.mType
             it.subDescription = point.mDescription
+            it.infoWindow = MarkerInfoWindow(R.layout.marker_info_window, mapInterface.getMap())
             poiMarkers.add(it)
         }
     }
